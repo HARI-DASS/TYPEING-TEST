@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeMaster - Smart Typing Coach</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <span>⌨</span> TypeMaster
+    </div>
+
+<nav>
+    <button class="nav-btn active" data-section="home">Home</button>
+    <button class="nav-btn" data-section="test">Typing Test</button>
+    <button class="nav-btn" data-section="practice">Practice</button>
+    <button class="nav-btn" data-section="dashboard">Dashboard</button>
+</nav>
+
+<button id="themeBtn" class="theme-btn">🌙</button>
+
+
+</header>
+
+<main>
+
+
+<!-- HOME -->
+<section id="home" class="section active-section">
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">SMART TYPING COACH</div>
+
+            <h1>
+                Type Faster.<br>
+                <span>Type Smarter.</span>
+            </h1>
+
+            <p>
+                Improve your typing speed and accuracy with
+                personalized analysis, weak-key detection,
+                practice recommendations and progress tracking.
+            </p>
+
+            <button id="startTestBtn" class="primary-btn">
+                Start Typing Test →
+            </button>
+
+        </div>
+
+        <div class="hero-card">
+
+            <div class="mini-header">
+                <span>YOUR PERFORMANCE</span>
+                <span>LIVE</span>
+            </div>
+
+            <div class="mini-stats">
+
+                <div>
+                    <strong id="homeWpm">0</strong>
+                    <small>WPM</small>
+                </div>
+
+                <div>
+                    <strong id="homeAccuracy">0%</strong>
+                    <small>Accuracy</small>
+                </div>
+
+                <div>
+                    <strong id="homeTests">0</strong>
+                    <small>Tests</small>
+                </div>
+
+            </div>
+
+            <div class="mini-progress">
+                <div></div>
+            </div>
+
+            <p class="mini-message">
+                Start your first test to track your progress.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Real-Time Analysis</h3>
+            <p>
+                Track WPM, accuracy, errors and performance
+                while you type.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🔥</div>
+            <h3>Keyboard Heatmap</h3>
+            <p>
+                Discover which keys are causing the most
+                typing mistakes.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <h3>Smart Practice</h3>
+            <p>
+                Practice exercises are created according
+                to your weaknesses.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Progress Tracking</h3>
+            <p>
+                Monitor your typing improvement over time.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TYPING TEST -->
+<section id="test" class="section">
+
+    <div class="page-title">
+        <span class="badge">TYPING TEST</span>
+        <h2>Test Your Typing Skills</h2>
+        <p>Choose your settings and start typing.</p>
+    </div>
+
+
+    <div class="test-settings">
+
+        <div class="setting-group">
+            <label>Duration</label>
+
+            <div class="option-group">
+                <button class="option-btn duration-btn active" data-time="60">1 Min</button>
+                <button class="option-btn duration-btn" data-time="30">30 Sec</button>
+                <button class="option-btn duration-btn" data-time="120">2 Min</button>
+                <button class="option-btn duration-btn" data-time="180">3 Min</button>
+            </div>
+        </div>
+
+
+        <div class="setting-group">
+            <label>Difficulty</label>
+
+            <div class="option-group">
+                <button class="option-btn difficulty-btn active" data-level="easy">Easy</button>
+                <button class="option-btn difficulty-btn" data-level="medium">Medium</button>
+                <button class="option-btn difficulty-btn" data-level="hard">Hard</button>
+            </div>
+        </div>
+
+
+        <div class="setting-group">
+            <label>Mode</label>
+
+            <div class="option-group">
+                <button class="option-btn mode-btn active" data-mode="normal">Normal</button>
+                <button class="option-btn mode-btn" data-mode="code">Code</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="typing-container">
+
+        <div class="typing-top">
+
+            <div class="live-stat">
+                <span>TIME</span>
+                <strong id="timer">01:00</strong>
+            </div>
+
+            <div class="live-stat">
+                <span>WPM</span>
+                <strong id="wpm">0</strong>
+            </div>
+
+            <div class="live-stat">
+                <span>ACCURACY</span>
+                <strong id="accuracy">100%</strong>
+            </div>
+
+            <div class="live-stat">
+                <span>ERRORS</span>
+                <strong id="errors">0</strong>
+            </div>
+
+        </div>
+
+
+        <div id="textDisplay" class="text-display">
+            Press "Start Test" and begin typing...
+        </div>
+
+
+        <textarea
+            id="typingInput"
+            class="typing-input"
+            placeholder="Click Start Test and type here..."
+            disabled
+            spellcheck="false"
+        ></textarea>
+
+
+        <div class="typing-actions">
+
+            <button id="beginBtn" class="primary-btn">
+                Start Test
+            </button>
+
+            <button id="resetBtn" class="secondary-btn">
+                Reset
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Keyboard (live press indicator only - full colored analysis appears on the Result page) -->
+    <div class="keyboard-section">
+
+        <h3>Live Keyboard</h3>
+
+        <div class="keyboard" id="testKeyboard"></div>
+
+    </div>
+
+</section>
+
+
+<!-- RESULT -->
+<section id="result" class="section">
+
+    <div class="page-title">
+        <span class="badge">TEST COMPLETE</span>
+        <h2>Your Performance</h2>
+        <p>Here's how you performed.</p>
+    </div>
+
+
+    <div class="result-grid">
+
+        <div class="result-card main-result">
+            <span>Typing Speed</span>
+            <strong id="resultWpm">0</strong>
+            <small>WORDS PER MINUTE</small>
+        </div>
+
+        <div class="result-card">
+            <span>Accuracy</span>
+            <strong id="resultAccuracy">0%</strong>
+        </div>
+
+        <div class="result-card">
+            <span>Errors</span>
+            <strong id="resultErrors">0</strong>
+        </div>
+
+        <div class="result-card">
+            <span>Score</span>
+            <strong id="resultScore">0</strong>
+        </div>
+
+    </div>
+
+
+    <!-- Detailed keystroke breakdown -->
+    <div class="detail-grid">
+
+        <div class="detail-card">
+            <span>Total Keystrokes</span>
+            <strong id="statTotalKeystrokes">0</strong>
+        </div>
+
+        <div class="detail-card">
+            <span>Correct Keystrokes</span>
+            <strong id="statCorrectKeystrokes">0</strong>
+        </div>
+
+        <div class="detail-card">
+            <span>Incorrect Keystrokes</span>
+            <strong id="statIncorrectKeystrokes">0</strong>
+        </div>
+
+        <div class="detail-card">
+            <span>Backspaces Used</span>
+            <strong id="statBackspaces">0</strong>
+        </div>
+
+        <div class="detail-card">
+            <span>Error Rate</span>
+            <strong id="statErrorRate">0%</strong>
+        </div>
+
+        <div class="detail-card">
+            <span>Time Taken</span>
+            <strong id="statTimeTaken">0s</strong>
+        </div>
+
+        <div class="detail-card">
+            <span>Consistency</span>
+            <strong id="statConsistency">0%</strong>
+        </div>
+
+        <div class="detail-card">
+            <span>Strongest Key</span>
+            <strong id="statStrongestKey">-</strong>
+        </div>
+
+        <div class="detail-card">
+            <span>Weakest Key</span>
+            <strong id="statWeakestKey">-</strong>
+        </div>
+
+        <div class="detail-card">
+            <span>Strongest Finger</span>
+            <strong id="statStrongestFinger">-</strong>
+        </div>
+
+        <div class="detail-card">
+            <span>Weakest Finger</span>
+            <strong id="statWeakestFinger">-</strong>
+        </div>
+
+    </div>
+
+
+    <div class="analysis-container">
+
+        <div class="analysis-card">
+
+            <h3>🧠 Smart Analysis</h3>
+
+            <div id="analysisText">
+                Complete a test to receive personalized analysis.
+            </div>
+
+        </div>
+
+
+        <div class="analysis-card">
+
+            <h3>🔥 Weak Keys</h3>
+
+            <div id="weakKeys">
+                No data yet.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Keyboard Performance Visualization -->
+    <div class="keyboard-section">
+
+        <h3>⌨ Keyboard Performance</h3>
+
+        <div class="keyboard" id="resultKeyboard"></div>
+
+        <div class="heatmap-legend">
+            <span><i class="legend-good"></i> Excellent</span>
+            <span><i class="legend-medium"></i> Needs Improvement</span>
+            <span><i class="legend-bad"></i> Weak</span>
+        </div>
+
+        <div class="key-tooltip" id="keyTooltip"></div>
+
+    </div>
+
+
+    <!-- Finger Performance -->
+    <div class="finger-section">
+
+        <h3>🖐 Finger Performance</h3>
+
+        <div class="finger-cards" id="fingerPerformanceCards"></div>
+
+    </div>
+
+
+    <div class="result-actions">
+
+        <button id="practiceWeakBtn" class="primary-btn">
+            Practice My Weaknesses →
+        </button>
+
+        <button id="againBtn" class="secondary-btn">
+            Take Another Test
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PRACTICE -->
+<section id="practice" class="section">
+
+    <div class="page-title">
+        <span class="badge">FINGER-BY-FINGER TRAINING</span>
+        <h2>Practice Module</h2>
+        <p>Targeted drills built from your typing test performance.</p>
+    </div>
+
+
+    <!-- Adaptive recommendation -->
+    <div class="recommendation-banner" id="recommendationBanner">
+        <div class="recommendation-text">
+            <strong id="recommendationTitle">Complete a Typing Test to unlock recommendations</strong>
+            <span id="recommendationSubtitle">Your weakest finger will be recommended for practice here.</span>
+        </div>
+        <button id="startRecommendedBtn" class="primary-btn" disabled>
+            Start Recommended Practice →
+        </button>
+    </div>
+
+
+    <!-- Ranked weakest fingers -->
+    <div class="finger-ranking-card" id="fingerRankingCard" style="display:none">
+        <h3>Weakest Fingers</h3>
+        <div id="fingerRankingList" class="finger-ranking-list"></div>
+    </div>
+
+
+    <!-- Finger selector -->
+    <div id="fingerSelectorView">
+
+        <h3 class="hand-title">Left Hand</h3>
+        <div class="finger-grid" id="leftHandGrid"></div>
+
+        <h3 class="hand-title">Right Hand</h3>
+        <div class="finger-grid" id="rightHandGrid"></div>
+
+        <h3 class="hand-title">Thumb</h3>
+        <div class="finger-grid" id="thumbGrid"></div>
+
+    </div>
+
+
+    <!-- Finger detail / exercise view -->
+    <div id="fingerDetailView" style="display:none">
+
+        <button id="backToFingersBtn" class="secondary-btn back-btn">← Back to Fingers</button>
+
+        <div class="finger-detail-header">
+            <h3 id="fingerDetailTitle">Left Index</h3>
+            <p id="fingerDetailExplanation"></p>
+            <div class="finger-keys-display" id="fingerDetailKeys"></div>
+        </div>
+
+        <div class="level-tabs" id="levelTabs"></div>
+
+        <div class="practice-box">
+
+            <div class="practice-header-row">
+                <span id="practiceLevelLabel">Level 1 - Key Familiarization</span>
+                <span id="practiceTimerDisplay" class="practice-timer" style="display:none">
+                    Time Left: <strong id="practiceTimeLeft">30</strong>s
+                </span>
+            </div>
+
+            <div id="practiceExerciseText" class="practice-text">
+                Select a finger to begin practicing.
+            </div>
+
+            <textarea
+                id="practiceInput"
+                class="typing-input"
+                placeholder="Click Start Practice, then type here..."
+                disabled
+                spellcheck="false"
+            ></textarea>
+
+            <div class="practice-actions">
+
+                <button id="startPracticeBtn" class="primary-btn">
+                    Start Practice
+                </button>
+
+                <button id="newPracticeExerciseBtn" class="secondary-btn">
+                    New Exercise
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Practice result -->
+        <div class="practice-result-panel" id="practiceResultPanel" style="display:none">
+
+            <h3>Practice Result</h3>
+
+            <div class="result-grid">
+
+                <div class="result-card main-result">
+                    <span>Speed</span>
+                    <strong id="practiceResultWpm">0</strong>
+                    <small>WPM</small>
+                </div>
+
+                <div class="result-card">
+                    <span>Accuracy</span>
+                    <strong id="practiceResultAccuracy">0%</strong>
+                </div>
+
+                <div class="result-card">
+                    <span>Errors</span>
+                    <strong id="practiceResultErrors">0</strong>
+                </div>
+
+                <div class="result-card">
+                    <span>Correct Characters</span>
+                    <strong id="practiceResultCorrect">0</strong>
+                </div>
+
+            </div>
+
+            <div class="improvement-banner" id="improvementBanner"></div>
+
+            <div class="level-progress">
+                <span>Level Progress</span>
+                <div class="mini-progress"><div id="levelProgressBar"></div></div>
+            </div>
+
+            <div class="level-up-banner" id="levelUpBanner" style="display:none"></div>
+
+            <div class="practice-actions">
+                <button id="practiceAgainBtn" class="primary-btn">Practice Again</button>
+                <button id="nextLevelBtn" class="secondary-btn" style="display:none">Next Level →</button>
+                <button id="backToFingersBtn2" class="secondary-btn">Back to Fingers</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="section">
+
+    <div class="page-title">
+        <span class="badge">YOUR PROGRESS</span>
+        <h2>Performance Dashboard</h2>
+        <p>Track your typing improvement over time.</p>
+    </div>
+
+
+    <div class="dashboard-stats">
+
+        <div class="dashboard-card">
+            <span>Best WPM</span>
+            <strong id="bestWpm">0</strong>
+        </div>
+
+        <div class="dashboard-card">
+            <span>Average WPM</span>
+            <strong id="avgWpm">0</strong>
+        </div>
+
+        <div class="dashboard-card">
+            <span>Best Accuracy</span>
+            <strong id="bestAccuracy">0%</strong>
+        </div>
+
+        <div class="dashboard-card">
+            <span>Total Tests</span>
+            <strong id="totalTests">0</strong>
+        </div>
+
+    </div>
+
+
+    <div class="chart-card">
+
+        <div class="chart-header">
+            <h3>WPM Progress</h3>
+            <span>Recent Tests</span>
+        </div>
+
+        <canvas id="wpmChart"></canvas>
+
+    </div>
+
+
+    <div class="history-card">
+
+        <div class="chart-header">
+            <h3>Test History</h3>
+
+            <button id="clearHistoryBtn" class="danger-btn">
+                Clear History
+            </button>
+        </div>
+
+        <div id="historyTable"></div>
+
+    </div>
+
+
+    <div class="achievements">
+
+        <h3>🏆 Achievements</h3>
+
+        <div class="achievement-grid">
+
+            <div class="achievement" id="achievementFirst">
+                <div>🎯</div>
+                <strong>First Test</strong>
+                <span>Complete your first test</span>
+            </div>
+
+            <div class="achievement" id="achievement50">
+                <div>⚡</div>
+                <strong>Speedster</strong>
+                <span>Reach 50 WPM</span>
+            </div>
+
+            <div class="achievement" id="achievement60">
+                <div>🚀</div>
+                <strong>Fast Typist</strong>
+                <span>Reach 60 WPM</span>
+            </div>
+
+            <div class="achievement" id="achievement95">
+                <div>🎯</div>
+                <strong>Accuracy Master</strong>
+                <span>Reach 95% accuracy</span>
+            </div>
+
+            <div class="achievement" id="achievement100">
+                <div>💯</div>
+                <strong>Perfect</strong>
+                <span>Reach 100% accuracy</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+
+
+<div class="footer-logo">
+    ⌨ TypeMaster
+</div>
+
+<p>
+    Smart typing practice built with HTML, CSS and JavaScript.
+</p>
+
+<span>© 2026 TypeMaster</span>
+
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
